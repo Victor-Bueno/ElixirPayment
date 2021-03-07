@@ -3,6 +3,7 @@ defmodule Elixirpay.User do
   import Ecto.Changeset
 
   alias Ecto.Changeset
+  alias Elixirpay.Account
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @required_params [:name, :age, :email, :password, :nickname]
@@ -14,6 +15,7 @@ defmodule Elixirpay.User do
     field :password, :string, virtual: true
     field :password_hash, :string
     field :nickname, :string
+    has_one :account, Account
 
     timestamps()
   end
