@@ -16,7 +16,7 @@ defmodule ElixirpayWeb.UsersController do
   defp handle_response({:error, result}, connection) do
     connection
     |> put_status(:bad_request)
-    |> put_view(ElixirPayWeb.ErrorView)
+    |> put_view(ElixirpayWeb.ErrorView)
     |> render("400.json", result: result)
   end
 end
