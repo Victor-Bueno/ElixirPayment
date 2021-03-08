@@ -1,8 +1,13 @@
 defmodule ElixirpayWeb.Router do
   use ElixirpayWeb, :router
+  import Plug.BasicAuth
 
   pipeline :api do
     plug :accepts, ["json"]
+  end
+
+  pipeline :auth do
+    plug :basic_auth, Application.compile_env(:elixirpay, :basic_auth)
   end
 
   scope "/api", ElixirpayWeb do
@@ -11,6 +16,10 @@ defmodule ElixirpayWeb.Router do
     get "/:fileName", WelcomeController, :index
 
     post "/users", UsersController, :create
+  end
+
+  scope "/api", ElixirpayWeb do
+    pipe_through [:api, :auth]
 
     post "/accounts/:id/deposit", AccountsController, :deposit
     post "/accounts/:id/withdraw", AccountsController, :withdraw

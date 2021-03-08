@@ -22,6 +22,10 @@ config :elixirpay, Elixirpay.Repo,
   migration_primary_key: [type: :binary_id],
   migration_foreign_key: [type: :binary_id]
 
+config :elixirpay, :basic_auth,
+  username: "oink", # if we were in production this data shouldn't be here
+  password: "mcPork" # if we were in production this data shouldn't be here
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
